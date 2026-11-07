@@ -1,0 +1,115 @@
+{
+  "crop": "carrot",
+  "version": 2,
+  "status": "draft — confirm with RAB / a postharvest specialist before production",
+  "applies_to": "Mature or young carrots, tops cut to under 2.5 cm, washed. Held 1–4 weeks before sale.",
+  "reference_ideal": {
+    "temperature_c": 0,
+    "relative_humidity_pct": "95-98",
+    "freezing_point_c": -1.4,
+    "ethylene_sensitive": true,
+    "ethylene_producer": false,
+    "chilling_sensitive": false,
+    "sources": [
+      "USDA Agriculture Handbook 66 (2016), 'Carrot'",
+      "UC Davis Postharvest Research and Extension Center, Carrot produce fact sheet"
+    ]
+  },
+  "controller": {
+    "crop": "carrot",
+    "version": 2,
+    "targetC": 2.0,
+    "hysteresisC": 0.7,
+    "alarmHighC": 5.0,
+    "alarmLowC": 0.5,
+    "freezeGuardC": 0.0,
+    "rhLow": 92,
+    "rhHigh": 97,
+    "alarmGraceMin": 30
+  },
+  "app": {
+    "safeMin": 0,
+    "safeMax": 5,
+    "humidityMin": 90,
+    "humidityMax": 98,
+    "excursionGraceMin": 30,
+    "humidityGraceMin": 120
+  },
+  "why_these_numbers": {
+    "targetC": "0°C is ideal but the ice water is ~0-1°C, so the chamber can't reach it safely. 2°C is the coldest safe target; quality at 2°C stays good for several weeks, at 4°C it is acceptable, at 6°C and above sprouting, rooting and bitterness come much faster.",
+    "alarmHighC": "Above ~5°C carrots respire faster, lose sweetness and water, and start to root or sprout.",
+    "freezeGuardC": "Carrots freeze at about -1.4°C. The air leaving the coil is the coldest in the room, so cooling stops when THAT air reaches 0°C. Frozen spots thaw into soft, water-soaked patches that rot.",
+    "rhHigh": "Above ~98% with poor hygiene, white mould (Sclerotinia) spreads between crates. 97% stops the humidifier before that.",
+    "humidityGraceMin": "Short humidity dips (door opened, loading) do no harm; carrots wilt only after hours of dry air. A dip counts only after 2 hours."
+  },
+  "humidity_method": [
+    "First choice: plastic crates lined with thin perforated polyethylene bags (about 0.03–0.05 mm, a few small holes per bag). The carrots' own moisture keeps the air in the bag near 95%, with no free water.",
+    "Second: a damp layer of clay bricks or gravel on the floor (keep it damp, never pooled). No standing water on the floor.",
+    "Ultrasonic humidifiers are off by default: hard water clogs them and can wet the crop."
+  ],
+  "handling_rules": [
+    "Get carrots into cold storage within 3 hours of harvest. Keep them in the shade until then.",
+    "Sort before storing: remove broken, cracked, forked, insect-damaged or rotting roots.",
+    "Cut the tops to under 2.5 cm. Leaves pull water out of the root.",
+    "Wash in clean water with 100–150 ppm free chlorine at pH 6.5–7.5 (or a food-grade peracetic acid product). Change the water when it gets dirty.",
+    "Pre-cool before loading: rinse in the coldest water available. The cold room holds carrots cold but cannot quickly cool a large warm load.",
+    "Do not cure carrots (unlike potatoes and onions). Curing only dries them out.",
+    "Use ventilated plastic crates, not sacks or wooden boxes.",
+    "Keep crates out of the direct blast of the fan and not touching the radiator.",
+    "Clean and disinfect crates and the floor between batches. Drain coil condensate outside the chamber."
+  ],
+  "storage_diseases": [
+    {
+      "name": "Bacterial soft rot (Pectobacterium)",
+      "signs": "Mushy, foul-smelling roots",
+      "triggers": "Free water on roots, bruising, freeze damage"
+    },
+    {
+      "name": "White mould (Sclerotinia sclerotiorum)",
+      "signs": "White cottony growth with hard black bodies",
+      "triggers": "Very high humidity with poor hygiene, infected roots brought in"
+    },
+    {
+      "name": "Black rot (Alternaria radicina)",
+      "signs": "Sunken black lesions, often at the crown",
+      "triggers": "Field infection, skin damage at harvest or sorting"
+    },
+    {
+      "name": "Grey mould (Botrytis cinerea)",
+      "signs": "Grey fuzzy mould on wounds",
+      "triggers": "Wounds, condensation on roots"
+    }
+  ],
+  "compatible_in_same_room": [
+    "cabbage",
+    "cauliflower",
+    "beetroot",
+    "turnip",
+    "spinach",
+    "leek"
+  ],
+  "do_not_mix_with": {
+    "gives_off_ethylene": [
+      "tomato",
+      "avocado",
+      "mango",
+      "passionFruit",
+      "banana",
+      "apple"
+    ],
+    "damaged_by_carrot_temperature": [
+      "pepper",
+      "eggplant",
+      "greenBeans",
+      "tomato"
+    ],
+    "not_ideal": {
+      "potato": "Not ethylene-producing, but table potatoes turn sweet below ~4°C. Store them in a separate, warmer room."
+    }
+  },
+  "to_verify": [
+    "RSB carrot standard number (an AI answer said 'RS 242'; not confirmed). Ask RSB for the current carrot specification.",
+    "Export paperwork: phytosanitary certificate and NAEB quality certificate. Confirm the issuing agency and process with NAEB.",
+    "Respiration rates and exact week counts per temperature (an AI answer gave numbers that did not come with a source page)."
+  ]
+}

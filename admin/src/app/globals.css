@@ -1,0 +1,237 @@
+@import 'tailwindcss';
+
+/*
+  Harvest Hold admin: tokens. Interface colors carry the brand green; charts use the validated
+  categorical palette (series-1…8, colorblind-checked) and the reserved status colors.
+*/
+:root {
+  color-scheme: light;
+  --page: #f6f7f5;
+  --surface: #ffffff;
+  --surface-2: #f9faf8;
+  --surface-3: #f1f3f0;
+  --border: #e4e7e2;
+  --border-strong: #d2d7d0;
+  --ink: #111a14;
+  --ink-2: #4b5650;
+  --ink-3: #7c867f;
+  --brand: #0b5a2b;
+  --brand-hover: #094a23;
+  --brand-soft: #eaf3ec;
+  --brand-ink: #0b5a2b;
+  --focus: #2a78d6;
+  --good: #0ca30c;
+  --good-ink: #006300;
+  --good-soft: #e9f6e9;
+  --warning: #fab219;
+  --warning-ink: #8a5a00;
+  --warning-soft: #fff6e0;
+  --serious: #ec835a;
+  --critical: #d03b3b;
+  --critical-ink: #a32424;
+  --critical-soft: #fdeeee;
+  --info-soft: #eaf2fc;
+  --info-ink: #1c5cab;
+  /* charts */
+  --chart-surface: #ffffff;
+  --grid: #e9ebe6;
+  --axis: #c3c2b7;
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --series-3: #1baf7a;
+  --series-4: #eda100;
+  --series-5: #e87ba4;
+  --series-6: #008300;
+  --series-7: #6250d6;
+  --series-8: #e34948;
+  --band: rgba(12, 163, 12, 0.08);
+  --shadow: 0 1px 2px rgba(17, 26, 20, 0.04), 0 1px 1px rgba(17, 26, 20, 0.03);
+  --shadow-lg: 0 12px 32px rgba(17, 26, 20, 0.12), 0 2px 6px rgba(17, 26, 20, 0.06);
+  /* sidebar: deep brand green in both themes */
+  --nav-bg: #0d2617;
+  --nav-ink: #ffffff;
+  --nav-ink-2: rgba(255, 255, 255, 0.68);
+  --nav-ink-3: rgba(255, 255, 255, 0.42);
+  --nav-hover: rgba(255, 255, 255, 0.06);
+  --nav-active: rgba(255, 255, 255, 0.1);
+  --nav-accent: #6fd47b;
+  --nav-border: rgba(255, 255, 255, 0.08);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+    --page: #0e110f;
+    --surface: #161a17;
+    --surface-2: #1b201c;
+    --surface-3: #222823;
+    --border: #2a302b;
+    --border-strong: #3a423c;
+    --ink: #eef1ee;
+    --ink-2: #b9c2bb;
+    --ink-3: #848e87;
+    --brand: #3a9a44;
+    --brand-hover: #46ab51;
+    --brand-soft: #1b2b1e;
+    --brand-ink: #7fd08a;
+    --good-ink: #5fd35f;
+    --good-soft: #17271a;
+    --warning-ink: #f5c35a;
+    --warning-soft: #2b2513;
+    --critical-ink: #f08a8a;
+    --critical-soft: #2e1a1a;
+    --info-soft: #172334;
+    --info-ink: #86b6ef;
+    --chart-surface: #161a17;
+    --grid: #262b27;
+    --axis: #3a423c;
+    --series-1: #3987e5;
+    --series-2: #d95926;
+    --series-3: #199e70;
+    --series-4: #c98500;
+    --series-5: #d55181;
+    --series-6: #008300;
+    --series-7: #9085e9;
+    --series-8: #e66767;
+    --band: rgba(12, 163, 12, 0.12);
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.5);
+    --nav-bg: #0a120d;
+  }
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --page: #0e110f;
+  --surface: #161a17;
+  --surface-2: #1b201c;
+  --surface-3: #222823;
+  --border: #2a302b;
+  --border-strong: #3a423c;
+  --ink: #eef1ee;
+  --ink-2: #b9c2bb;
+  --ink-3: #848e87;
+  --brand: #3a9a44;
+  --brand-hover: #46ab51;
+  --brand-soft: #1b2b1e;
+  --brand-ink: #7fd08a;
+  --good-ink: #5fd35f;
+  --good-soft: #17271a;
+  --warning-ink: #f5c35a;
+  --warning-soft: #2b2513;
+  --critical-ink: #f08a8a;
+  --critical-soft: #2e1a1a;
+  --info-soft: #172334;
+  --info-ink: #86b6ef;
+  --chart-surface: #161a17;
+  --grid: #262b27;
+  --axis: #3a423c;
+  --series-1: #3987e5;
+  --series-2: #d95926;
+  --series-3: #199e70;
+  --series-4: #c98500;
+  --series-5: #d55181;
+  --series-6: #008300;
+  --series-7: #9085e9;
+  --series-8: #e66767;
+  --band: rgba(12, 163, 12, 0.12);
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.5);
+  --nav-bg: #0a120d;
+}
+
+@theme inline {
+  --color-page: var(--page);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-line: var(--border);
+  --color-line-strong: var(--border-strong);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-brand: var(--brand);
+  --color-brand-hover: var(--brand-hover);
+  --color-brand-soft: var(--brand-soft);
+  --color-brand-ink: var(--brand-ink);
+  --color-good: var(--good);
+  --color-good-ink: var(--good-ink);
+  --color-good-soft: var(--good-soft);
+  --color-warning: var(--warning);
+  --color-warning-ink: var(--warning-ink);
+  --color-warning-soft: var(--warning-soft);
+  --color-critical: var(--critical);
+  --color-critical-ink: var(--critical-ink);
+  --color-critical-soft: var(--critical-soft);
+  --color-info-soft: var(--info-soft);
+  --color-info-ink: var(--info-ink);
+  --font-sans: var(--font-inter), system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, monospace;
+  --color-nav: var(--nav-bg);
+  --color-nav-ink: var(--nav-ink);
+  --color-nav-ink-2: var(--nav-ink-2);
+  --color-nav-ink-3: var(--nav-ink-3);
+  --color-nav-hover: var(--nav-hover);
+  --color-nav-active: var(--nav-active);
+  --color-nav-accent: var(--nav-accent);
+  --color-nav-line: var(--nav-border);
+  --shadow-card: var(--shadow);
+  --shadow-pop: var(--shadow-lg);
+}
+
+html,
+body {
+  background: var(--page);
+  color: var(--ink);
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: 'cv11', 'ss01';
+}
+
+/* Thin, quiet scrollbars (sidebar, lists). */
+.thin-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, currentColor 18%, transparent) transparent;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* Live dot */
+@keyframes hh-pulse {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--good) 55%, transparent); }
+  70% { box-shadow: 0 0 0 7px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+.live-dot {
+  animation: hh-pulse 2s infinite;
+}
+@keyframes hh-flash {
+  from { background: var(--brand-soft); }
+  to { background: transparent; }
+}
+.flash {
+  animation: hh-flash 1.6s ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .live-dot,
+  .flash {
+    animation: none;
+  }
+}
+
+/* Certificate preview prints as a clean sheet. */
+@media print {
+  body * { visibility: hidden; }
+  .print-sheet, .print-sheet * { visibility: visible; }
+  .print-sheet { position: absolute; inset: 0; box-shadow: none !important; border: 0 !important; }
+}

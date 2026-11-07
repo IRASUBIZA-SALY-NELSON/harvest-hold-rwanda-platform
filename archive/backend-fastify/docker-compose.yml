@@ -1,0 +1,15 @@
+# Local development database. Production: see Dockerfile and README.
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: harvest
+      POSTGRES_PASSWORD: harvest
+      POSTGRES_DB: harvest
+    ports:
+      - "127.0.0.1:5440:5432"
+    volumes:
+      - harvest-db:/var/lib/postgresql/data
+      - ./docker/init-test-db.sql:/docker-entrypoint-initdb.d/init-test-db.sql:ro
+volumes:
+  harvest-db:

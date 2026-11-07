@@ -1,0 +1,58 @@
+# The whole system on one server: database, API and admin portal.
+#   cp .env.production.example .env.production   # fill it in
+#   docker compose --env-file .env.production up -d --build
+# Put a TLS reverse proxy (Caddy, nginx) in front: the API and the portal must be served over HTTPS.
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: harvest
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?set DB_PASSWORD}
+      POSTGRES_DB: harvest
+    volumes:
+      - db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U harvest"]
+      interval: 5s
+
+  api:
+    build: { context: ., dockerfile: api/Dockerfile }
+    restart: unless-stopped
+    depends_on: { db: { condition: service_healthy } }
+    environment:
+      DATABASE_URL: postgres://harvest:${DB_PASSWORD}@db:5432/harvest
+      PUBLIC_BASE_URL: ${PUBLIC_API_URL:?set PUBLIC_API_URL}
+      ADMIN_ORIGIN: ${ADMIN_URL:?set ADMIN_URL}
+      SECRET: ${SECRET:?set SECRET}
+      CERT_SIGNING_KEY: ${CERT_SIGNING_KEY:?set CERT_SIGNING_KEY}
+      SMS_DRIVER: ${SMS_DRIVER:-africastalking}
+      AT_USERNAME: ${AT_USERNAME:-}
+      AT_API_KEY: ${AT_API_KEY:-}
+      AT_SENDER_ID: ${AT_SENDER_ID:-}
+      AT_SANDBOX: ${AT_SANDBOX:-false}
+      # MQTT for the controllers is OFF by default (HTTPS is in use). If you switch it on, plain MQTT is
+      # published on localhost only: a TLS proxy in front (port 8883) ends the encryption and forwards to it.
+      MQTT_ENABLED: ${MQTT_ENABLED:-false}
+      MQTT_ALLOW_PLAIN: ${MQTT_ALLOW_PLAIN:-true}
+    volumes:
+      - data:/data
+    ports:
+      - "127.0.0.1:4000:4000"
+      - "127.0.0.1:1883:1883"
+
+  admin:
+    build:
+      context: .
+      dockerfile: admin/Dockerfile
+      args: { PUBLIC_API_URL: "${PUBLIC_API_URL}" }
+    restart: unless-stopped
+    depends_on: [api]
+    environment:
+      ADMIN_API_URL: http://api:4000
+    ports:
+      - "127.0.0.1:3000:3000"
+
+volumes:
+  db:
+  data:

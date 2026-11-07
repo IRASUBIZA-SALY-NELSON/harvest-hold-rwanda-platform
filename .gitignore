@@ -1,0 +1,21 @@
+# Secrets and local settings: never commit these
+.env
+.env.*
+!.env.example
+!.env.production.example
+*.pem
+keys/
+
+# Build output and dependencies
+node_modules/
+dist/
+.next/
+.expo/
+*.tsbuildinfo
+
+# Local data and builds
+uploads/
+firmware-releases/
+*.apk
+.claude/
+*.pdf
